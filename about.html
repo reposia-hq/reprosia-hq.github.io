@@ -251,7 +251,7 @@
       </div>
       <div class="mission-prose">
         <p><strong>We are not a regulatory consultancy</strong> that happens to use software. We are a technology company that deeply understands regulation. The distinction matters: our goal is to encode regulatory expertise into software that scales — not to bill consulting hours indefinitely.</p>
-        <p>The open-source foundation — <strong>reproducr, regulog, lineager, and estimandr</strong> — is our commitment to the community. These packages solve real problems for individual statisticians and teams. Reprosia is the platform that makes those solutions work at enterprise scale, with the AI audit layer, environment management, and submission tooling that regulated environments require.</p>
+        <p>The open-source foundation — <strong>bayprior, reproducr, regulog, lineager, and estimandr</strong> — is our commitment to the community. These packages solve real problems for individual statisticians and teams. Reprosia is the platform that makes those solutions work at enterprise scale, with the AI audit layer, environment management, and submission tooling that regulated environments require.</p>
         <p>We are based in <strong>Brussels, Belgium</strong>, registered as ReproStats BV. We work with pharma and biotech teams across Europe and globally. EU data residency is built in, not bolted on.</p>
         <p>This is early days. We are working with a small number of teams in private early access. If reproducibility is a problem you are trying to solve, <a href="contact.html">we want to talk to you</a>.</p>
       </div>
@@ -268,7 +268,7 @@
         <div class="stat-l">reproducr current version on CRAN</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-n">4</div>
+        <div class="stat-n">5</div>
         <div class="stat-l">open-source packages in the ecosystem</div>
       </div>
       <div class="stat-cell">
@@ -342,7 +342,7 @@
         <div class="founder-role">Founder · ReproStats BV &amp; Reprosia</div>
         <div class="founder-bio">
           <p>Biostatistician and R developer based in Brussels, Belgium. Before building Reprosia, Ndoh spent years working on clinical trial analyses — watching submissions fail not because the science was flawed, but because the computational infrastructure around it wasn't documented or reproducible.</p>
-          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — four open-source packages covering audit, provenance, logging, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
+          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — five open-source packages covering Bayesian prior methodology, reproducibility, audit logging, data provenance, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
           <p>Ndoh holds deep expertise in ICH E9(R1) estimand methodology, 21 CFR Part 11 compliance for R environments, and CDISC data standards for regulatory submissions.</p>
         </div>
         <div class="founder-links">
@@ -359,9 +359,16 @@
   <div class="container">
     <div class="eyebrow ruled">Open-source foundation</div>
     <h2 class="display display-md" style="margin-bottom:1rem">ReproStats: the foundation<br><em>beneath Reprosia.</em></h2>
-    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">Reprosia is built on four open-source R packages, peer-reviewed and available on CRAN and GitHub. The platform adds the AI audit engine, environment management, and enterprise workflow — on top of a foundation that belongs to everyone.</p>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">Reprosia is built on five open-source R packages, peer-reviewed and available on CRAN and GitHub. The platform adds the AI audit engine, environment management, and enterprise workflow — on top of a foundation that belongs to everyone.</p>
     <div class="oss-layout reveal">
       <div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">bayprior</div>
+            <span class="oss-status badge badge-teal">On CRAN</span>
+          </div>
+          <div class="oss-desc">Structured Bayesian prior elicitation, conflict diagnostics, sensitivity analysis, and regulatory reporting. Aligned with FDA 2026 Bayesian draft guidance. Includes interactive Shiny app.</div>
+        </div>
         <div class="oss-card">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="oss-name">reproducr</div>
@@ -369,6 +376,14 @@
           </div>
           <div class="oss-desc">Script audit, environment certification, risk scoring and drift detection for regulated R analyses. The core reproducibility engine.</div>
         </div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">bayprior</div>
+            <span class="oss-status badge badge-teal">On CRAN</span>
+          </div>
+          <div class="oss-desc">Structured Bayesian prior elicitation, conflict diagnostics, sensitivity analysis, and regulatory report generation. Directly addresses FDA 2026 Bayesian guidance. Includes interactive Shiny app.</div>
+        </div>
+
         <div class="oss-card">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="oss-name">regulog</div>

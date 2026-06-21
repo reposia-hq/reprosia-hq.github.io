@@ -204,6 +204,7 @@
       <button class="tab-btn" data-tab-btn="regulatory">Regulatory Affairs</button>
       <button class="tab-btn" data-tab-btn="cro">CRO Teams</button>
       <button class="tab-btn" data-tab-btn="migration">SAS → R Migration</button>
+      <button class="tab-btn" data-tab-btn="bayesian">Bayesian Analysis</button>
     </div>
 
     <!-- ALL -->
@@ -325,6 +326,24 @@
             </div>
             <div style="margin-top:1.25rem;display:flex;gap:0.5rem;flex-wrap:wrap">
               <span class="tag">Equivalence testing</span><span class="tag">Migration audit</span><span class="tag">GxP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-card-head">
+            <div class="case-label">Bayesian Analysis · FDA 2026</div>
+            <h3>Prior elicitation and regulatory justification</h3>
+          </div>
+          <div class="case-card-body">
+            <p>Structured Bayesian prior elicitation, conflict diagnostics, and regulatory-ready prior justification reports. Aligned with the FDA 2026 draft guidance on Bayesian methods for drug and biological products.</p>
+            <ul class="feat-list">
+              <li>SHELF-style elicitation across 6 distribution families</li>
+              <li>Prior-data conflict diagnostics and sensitivity analysis</li>
+              <li>Submission-ready prior justification reports</li>
+            </ul>
+            <div style="margin-top:1.25rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+              <span class="tag">bayprior</span><span class="tag">FDA 2026</span>
             </div>
           </div>
         </div>
@@ -476,6 +495,48 @@
       </div>
     </div>
 
+    <!-- BAYESIAN -->
+    <div data-tab-pane="bayesian" class="tab-pane">
+      <div class="grid-2 reveal">
+        <div class="case-card">
+          <div class="case-card-head">
+            <div class="case-label">Bayesian Clinical Trials · FDA 2026</div>
+            <h3>Prior elicitation and regulatory justification</h3>
+          </div>
+          <div class="case-card-body">
+            <p>The FDA 2026 draft guidance on Bayesian statistical methods raises the bar for prior justification. Reprosia integrates bayprior to provide structured elicitation workflows, conflict diagnostics, and regulatory-ready prior justification reports directly in your submission package.</p>
+            <ul class="feat-list">
+              <li>SHELF-style quantile matching and moment matching across 6 distribution families</li>
+              <li>Prior-data conflict diagnostics (Box p-value, Bhattacharyya overlap, KL divergence)</li>
+              <li>Sensitivity analysis with tornado plots and influence heatmaps</li>
+              <li>Self-contained prior justification reports (HTML, PDF, Word) for regulatory submission</li>
+            </ul>
+            <div style="margin-top:1.25rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+              <span class="tag">FDA 2026 guidance</span><span class="tag">bayprior</span><span class="tag">ICH E9(R1)</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-card-head">
+            <div class="case-label">Adaptive &amp; Informative Designs</div>
+            <h3>Historical data borrowing with power priors</h3>
+          </div>
+          <div class="case-card-body">
+            <p>Leverage historical control data or prior trial evidence in your Bayesian design with principled, audit-ready methodology. Reprosia supports robust mixture priors, power priors, and sceptical priors — each with complete documentation for regulatory review.</p>
+            <ul class="feat-list">
+              <li>Calibrated power priors via Bayes Factor optimisation</li>
+              <li>Robust mixture priors (Schmidli et al.) for MAP borrowing</li>
+              <li>Sceptical priors for regulatory sensitivity analyses</li>
+              <li>Expert opinion pooling with Bhattacharyya agreement diagnostics</li>
+            </ul>
+            <div style="margin-top:1.25rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+              <span class="tag">Power prior</span><span class="tag">MAP prior</span><span class="tag">Adaptive design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -515,6 +576,23 @@
         <h3>R&amp;D IT / Validation</h3>
         <p>Computerised system validation evidence generated automatically. Integrate Reprosia with existing GxP IT infrastructure and change control processes.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONSULTING ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">Consulting services</div>
+    <h2 class="display display-md" style="margin-bottom:1rem">Expert support for<br><em>regulated R environments.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">We work directly with pharma, biotech, and CRO teams to implement reproducible, compliant R infrastructure. Every engagement is hands-on, led by the founder.</p>
+    <div class="grid-3 reveal">
+      <div class="card card-accent"><div class="card-icon">01</div><h3>Regulatory R implementation</h3><p>End-to-end implementation of R in GxP environments. Validation strategy, SOPs, system validation, and ongoing compliance support.</p></div>
+      <div class="card card-accent reveal-d1"><div class="card-icon">02</div><h3>Reproducibility audits</h3><p>Independent audit of your R analysis pipeline. We identify reproducibility risks and compliance gaps, with a prioritised remediation roadmap.</p></div>
+      <div class="card card-accent reveal-d2"><div class="card-icon">03</div><h3>IQ/OQ/PQ validation</h3><p>Validation of R and R packages to pharmaceutical industry standards. Full qualification documentation acceptable for FDA and EMA review.</p></div>
+      <div class="card card-accent reveal-d3"><div class="card-icon">04</div><h3>Estimand specification</h3><p>ICH E9(R1) estimand strategy for your clinical trial programme — from protocol definition to SAP implementation.</p></div>
+      <div class="card card-accent reveal-d4"><div class="card-icon">05</div><h3>SAS 2192 R migration</h3><p>Structured migration from SAS to R in regulated environments. Equivalence testing, validation bridging, and compliance throughout.</p></div>
+      <div class="card card-accent reveal-d5"><div class="card-icon">06</div><h3>Bayesian trial support</h3><p>Prior elicitation, conflict diagnostics, and FDA 2026 Bayesian guidance implementation using the bayprior framework.</p></div>
     </div>
   </div>
 </section>
