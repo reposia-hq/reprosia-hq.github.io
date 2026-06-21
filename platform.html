@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform — Reprosia</title>
+  <meta name="description" content="The Reprosia platform: validate, reproduce, submit. AI-native infrastructure for pharmaceutical R&D.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Architecture diagram ── */
+    .arch-diagram {
+      margin: 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+    }
+    .arch-node {
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .arch-node:hover { border-color: var(--border-teal); }
+    .arch-node-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.625rem;
+    }
+    .arch-node-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1875rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .arch-node p {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+    .arch-arrow {
+      text-align: center;
+      color: var(--teal);
+      font-size: 1.5rem;
+      padding: 0 0.5rem;
+      opacity: 0.5;
+    }
+
+    /* ── Pillar sections ── */
+    .pillar-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pillar-section:last-child { border-bottom: none; }
+    .pillar-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .pillar-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .pillar-visual {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+    .pv-green  { color: #28c840; }
+    .pv-blue   { color: #79b8ff; }
+    .pv-teal   { color: var(--teal); }
+    .pv-yellow { color: #febc2e; }
+    .pv-label  { color: var(--text-soft); }
+
+    /* ── Spec table ── */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    .spec-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-mid);
+    }
+    .spec-table td {
+      padding: 0.875rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--border);
+    }
+    .spec-table tr:last-child td { border-bottom: none; }
+    .spec-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ── Integration strip ── */
+    .integration-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .int-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .int-card:hover { border-color: var(--border-teal); transform: translateY(-3px); }
+    .int-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.625rem;
+    }
+    .int-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.375rem;
+    }
+    .int-desc { font-size: 0.78rem; color: var(--text-mid); line-height: 1.55; }
+
+    @media (max-width: 900px) {
+      .arch-diagram { grid-template-columns: 1fr; }
+      .arch-arrow { transform: rotate(90deg); }
+      .pillar-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .integration-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      .integration-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="platform.html" class="active">Platform</a></li>
+    <li><a href="use-cases.html">Use Cases</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="contact.html" class="btn btn-teal btn-sm">Request access</a>
+  </div>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<nav class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="platform.html" class="active">Platform</a>
+  <a href="use-cases.html">Use Cases</a>
+  <a href="about.html">About</a>
+  <a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a>
+  <a href="contact.html" class="btn btn-teal btn-sm nav-cta-mobile">Request access</a>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow ruled">The platform</div>
+    <h1 class="display display-lg">The infrastructure layer<br>pharma R&amp;D has been <em>missing.</em></h1>
+    <p class="lead">Reprosia is not a reporting tool. It is the AI-native foundation that makes pharmaceutical analyses trustworthy, reproducible, and submission-ready by design.</p>
+    <div class="btn-group">
+      <a href="contact.html" class="btn btn-teal">Request early access</a>
+      <a href="#architecture" class="btn btn-ghost">Explore architecture</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHITECTURE ─── -->
+<section class="section" id="architecture">
+  <div class="container">
+    <div class="eyebrow ruled">Architecture</div>
+    <h2 class="display display-md" style="margin-bottom:0.875rem">How the platform<br><em>fits together.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300">Three layers: your existing R environment, the Reprosia AI audit engine, and regulatory-ready output. No migration required.</p>
+    <div class="arch-diagram reveal">
+      <div class="arch-node">
+        <div class="arch-node-label">Layer 1</div>
+        <div class="arch-node-title">Your R Environment</div>
+        <p>Existing scripts, packages, data pipelines. RStudio, Posit, CI/CD. No change required.</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-node-label">Layer 2</div>
+        <div class="arch-node-title">Reprosia AI Engine</div>
+        <p>Audit, validate, lock, certify. AI-powered compliance scanning and environment management.</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-node-label">Layer 3</div>
+        <div class="arch-node-title">Regulatory Output</div>
+        <p>eCTD-ready packages, IQ/OQ/PQ docs, CDISC outputs, estimand documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THREE PILLARS ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">Platform pillars</div>
+    <h2 class="display display-md" style="margin-bottom:3.5rem">Three pillars of<br><em>analytical integrity.</em></h2>
+
+    <!-- VALIDATE -->
+    <div class="pillar-section" id="validate">
+      <div class="pillar-layout reveal">
+        <div>
+          <div class="pillar-num">01 — Validate</div>
+          <h3 class="display display-sm" style="margin-bottom:1rem">Your environment,<br><em>certified.</em></h3>
+          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem">AI-assisted IQ/OQ/PQ validation of your R environment and packages. Every function call, parameter, and result documented automatically with cryptographic audit trails compliant with 21 CFR Part 11 and GxP requirements.</p>
+          <ul class="feat-list" style="font-size:0.9rem">
+            <li>Installation Qualification (IQ) — system and package verification</li>
+            <li>Operational Qualification (OQ) — function behaviour testing</li>
+            <li>Performance Qualification (PQ) — end-to-end workflow validation</li>
+            <li>Tamper-evident audit trail with digital signatures</li>
+            <li>User-attributed action logging with timestamps</li>
+            <li>Automated validation report generation for agency review</li>
+          </ul>
+          <div style="margin-top:1.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag">21 CFR Part 11</span>
+            <span class="tag">GxP</span>
+            <span class="tag">IQ/OQ/PQ</span>
+            <span class="tag">reproducr</span>
+            <span class="tag">regulog</span>
+          </div>
+        </div>
+        <div class="pillar-visual">
+          <div><span class="pv-label"># Validate R environment</span></div>
+          <div style="margin-top:0.5rem"><span class="pv-blue">library</span>(reproducr)</div>
+          <div style="margin-top:0.75rem"><span class="pv-blue">validate_env</span>(<span class="pv-teal">"production"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> R 4.3.2 — certified</div>
+          <div><span class="pv-green">✓</span> 23 packages — IQ passed</div>
+          <div><span class="pv-green">✓</span> OQ tests: 847/847 passed</div>
+          <div><span class="pv-green">✓</span> PQ workflow: complete</div>
+          <div style="margin-top:0.75rem"><span class="pv-label"># Generate validation report</span></div>
+          <div><span class="pv-blue">export_validation_report</span>()</div>
+          <div style="margin-top:0.5rem"><span class="pv-teal">→</span> validation_report_2026.pdf</div>
+          <div><span class="pv-teal">→</span> Audit trail: 1,247 entries</div>
+          <div><span class="pv-teal">→</span> SHA-256: a3f8c2d1...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPRODUCE -->
+    <div class="pillar-section" id="reproduce">
+      <div class="pillar-layout reveal">
+        <div>
+          <div class="pillar-num">02 — Reproduce</div>
+          <h3 class="display display-sm" style="margin-bottom:1rem">Results that<br><em>don't drift.</em></h3>
+          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem">Guaranteed reproducibility across environments, teams, and time. Locked package versions, containerised execution, and continuous drift monitoring ensure your analysis at database lock matches your analysis at submission — to the decimal.</p>
+          <ul class="feat-list" style="font-size:0.9rem">
+            <li>Environment snapshots and lockfiles at any analysis stage</li>
+            <li>Continuous drift detection — alerts on any environmental change</li>
+            <li>Cross-site reproducibility for multi-centre trials</li>
+            <li>Hash-verified script and data integrity</li>
+            <li>Containerised execution for submission reproducibility</li>
+            <li>Historical replay — re-run any analysis from any point in time</li>
+          </ul>
+          <div style="margin-top:1.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag">Environment lock</span>
+            <span class="tag">Drift detection</span>
+            <span class="tag">lineager</span>
+            <span class="tag">reproducr</span>
+          </div>
+        </div>
+        <div class="pillar-visual">
+          <div><span class="pv-label"># Lock analysis environment</span></div>
+          <div style="margin-top:0.5rem"><span class="pv-blue">audit_script</span>(<span class="pv-teal">"primary_analysis.R"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> 18 functions certified</div>
+          <div><span class="pv-green">✓</span> Risk score: <span class="pv-teal">0.02</span> (low)</div>
+          <div><span class="pv-green">✓</span> 35 audit entries logged</div>
+          <div style="margin-top:0.75rem"><span class="pv-blue">lock_environment</span>(<span class="pv-teal">"DBL"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> Snapshot: env_2026-06-20</div>
+          <div><span class="pv-green">✓</span> 23 packages locked</div>
+          <div style="margin-top:0.75rem"><span class="pv-label"># Check for drift</span></div>
+          <div><span class="pv-blue">check_drift</span>()</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> No drift detected</div>
+          <div><span class="pv-green">✓</span> Environment: stable</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="pillar-section" id="submit">
+      <div class="pillar-layout reveal">
+        <div>
+          <div class="pillar-num">03 — Submit</div>
+          <h3 class="display display-sm" style="margin-bottom:1rem">Submission packages<br><em>built to pass.</em></h3>
+          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem">Regulatory-ready outputs for FDA and EMA submissions. CDISC-compatible data structures, ICH E9(R1) estimand documentation, and pre-built eCTD templates — generated directly from your existing R analysis pipeline, with full traceability back to source data.</p>
+          <ul class="feat-list" style="font-size:0.9rem">
+            <li>SDTM and ADaM compatible output generation</li>
+            <li>ICH E9(R1) estimand specification documentation</li>
+            <li>eCTD-ready submission package assembly</li>
+            <li>Define.xml and reviewer's guide generation</li>
+            <li>Full lineage from raw data to submission dataset</li>
+            <li>FDA and EMA reviewer-friendly output formats</li>
+          </ul>
+          <div style="margin-top:1.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag">CDISC</span>
+            <span class="tag">ICH E9(R1)</span>
+            <span class="tag">eCTD</span>
+            <span class="tag">estimandr</span>
+          </div>
+        </div>
+        <div class="pillar-visual">
+          <div><span class="pv-label"># Define estimand (ICH E9R1)</span></div>
+          <div style="margin-top:0.5rem"><span class="pv-blue">library</span>(estimandr)</div>
+          <div style="margin-top:0.5rem"><span class="pv-blue">define_estimand</span>(</div>
+          <div style="padding-left:1.25rem">population = <span class="pv-teal">"ITT"</span>,</div>
+          <div style="padding-left:1.25rem">variable    = <span class="pv-teal">"HbA1c change"</span>,</div>
+          <div style="padding-left:1.25rem">ice_strategy= <span class="pv-teal">"hypothetical"</span>,</div>
+          <div style="padding-left:1.25rem">summary     = <span class="pv-teal">"mean difference"</span></div>
+          <div>)</div>
+          <div style="margin-top:0.75rem"><span class="pv-blue">certify</span>(<span class="pv-teal">"submission"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> eCTD package: ready</div>
+          <div><span class="pv-green">✓</span> CDISC validation: passed</div>
+          <div><span class="pv-green">✓</span> Define.xml: generated</div>
+          <div><span class="pv-teal">→</span> Submission ready for FDA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORKFLOW ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">Workflow</div>
+    <h2 class="display display-md" style="margin-bottom:3.5rem">From first line of R to<br><em>approved submission.</em></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 4rem" class="reveal">
+      <div>
+        <div class="step-row">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3>Connect your environment</h3>
+            <p>Integrates with existing R workflows in minutes. Works alongside RStudio, Posit Workbench, and CI/CD pipelines. No migration required.</p>
+            <span class="tag">reproducr</span> <span class="tag">regulog</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3>AI audits your pipeline</h3>
+            <p>Automatic scanning for reproducibility risks, undocumented dependencies, environment drift, and compliance gaps — before they become submission failures.</p>
+            <span class="tag">lineager</span> <span class="tag">estimandr</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="step-row">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3>Lock, certify, document</h3>
+            <p>Freeze your environment at database lock. Generate automated IQ/OQ/PQ validation documentation and full audit reports ready for agency review.</p>
+            <span class="tag">IQ / OQ / PQ</span>
+          </div>
+        </div>
+        <div class="step-row" style="border-bottom:none">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3>Package and submit</h3>
+            <p>One command to generate your eCTD-compatible submission package. Full audit trail, reproducibility proof, and regulatory documentation included.</p>
+            <span class="tag">FDA</span> <span class="tag">EMA</span> <span class="tag">ICH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INTEGRATIONS ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">Integrations</div>
+    <h2 class="display display-md" style="margin-bottom:1rem">Works with your<br><em>existing stack.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:480px;line-height:1.75;font-weight:300">Reprosia wraps around your existing R infrastructure. No rip and replace.</p>
+    <div class="integration-grid reveal">
+      <div class="int-card">
+        <div class="int-icon">R</div>
+        <div class="int-name">Base R &amp; Tidyverse</div>
+        <div class="int-desc">Full support for R 4.x and all tidyverse packages</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon">IDE</div>
+        <div class="int-name">RStudio / Posit</div>
+        <div class="int-desc">Native RStudio add-in and Posit Workbench integration</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon">CI</div>
+        <div class="int-name">GitHub Actions</div>
+        <div class="int-desc">Automated validation in CI/CD pipelines</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon">SAS</div>
+        <div class="int-name">SAS Bridging</div>
+        <div class="int-desc">Equivalence testing for SAS to R migration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPLIANCE TABLE ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">Compliance coverage</div>
+    <h2 class="display display-md" style="margin-bottom:0.875rem">Every requirement,<br><em>covered.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:480px;line-height:1.75;font-weight:300;margin-bottom:2rem">Built against real regulatory requirements from the ground up.</p>
+    <table class="spec-table reveal">
+      <thead>
+        <tr>
+          <th>Standard</th>
+          <th>Coverage</th>
+          <th>Feature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>21 CFR Part 11</td><td>Full</td><td>Electronic records, audit trail, digital signatures, access controls</td></tr>
+        <tr><td>ICH E9(R1)</td><td>Full</td><td>Estimand specification, intercurrent event strategies, SAP documentation</td></tr>
+        <tr><td>GCP / GLP</td><td>Full</td><td>Good Practice workflow integration, validation SOPs, change control</td></tr>
+        <tr><td>CDISC SDTM</td><td>Full</td><td>Study data tabulation model output, define.xml, reviewer's guide</td></tr>
+        <tr><td>CDISC ADaM</td><td>Full</td><td>Analysis dataset model, ADSL, ADAE, ADTTE derivation tracking</td></tr>
+        <tr><td>eCTD</td><td>Full</td><td>Module 5 statistical output packaging, bookmarking, hyperlinking</td></tr>
+        <tr><td>EMA Guidelines</td><td>Full</td><td>CHMP statistical guidelines, conditional approval requirements</td></tr>
+        <tr><td>GDPR</td><td>Full</td><td>EU data residency, processing records, data subject rights</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-strip section-alt">
+  <div class="cta-strip-glow"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="eyebrow" style="justify-content:center">Early access</div>
+    <h2 class="display display-md" style="text-align:center;margin-bottom:1rem">Ready to see Reprosia<br><em>in your environment?</em></h2>
+    <p class="lead" style="text-align:center">We work directly with pharma and biotech teams. Request early access and we'll be in touch within 48 hours.</p>
+    <div class="btn-group" style="justify-content:center">
+      <a href="contact.html" class="btn btn-teal">Request early access</a>
+      <a href="use-cases.html" class="btn btn-ghost">See use cases →</a>
+    </div>
+    <p class="cta-email">Or reach us at <a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></p>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+      <p>AI-native pharma R&amp;D platform built on open-source foundations.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="platform.html">Overview</a></li>
+        <li><a href="platform.html#validate">Validate</a></li>
+        <li><a href="platform.html#reproduce">Reproduce</a></li>
+        <li><a href="platform.html#submit">Submit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="use-cases.html">Use Cases</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://github.com/repro-stats" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://reprostats.org" target="_blank" rel="noopener">ReproStats</a></li>
+        <li><a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 ReproStats BV · Brussels, Belgium</span>
+    <span class="footer-copy">reprosia.com</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

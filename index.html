@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reprosia — AI-Native Pharma R&D Platform</title>
+  <meta name="description" content="Reprosia brings AI-driven rigor to pharmaceutical research — from first analysis to regulatory submission.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2.5rem 5rem;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      opacity: 0.38;
+      pointer-events: none;
+    }
+    .hero-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 62% 50%, var(--teal-dim) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before { content:''; display:block; width:1.75rem; height:1px; background:var(--teal); flex-shrink:0; }
+    .hero h1 { margin-bottom: 1.75rem; }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-mid);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .hstat-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.375rem;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .hstat-label { font-size: 0.78rem; color: var(--text-soft); }
+
+    /* ── Problem ── */
+    .problem-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .pstat {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      background: var(--surface-2);
+      margin-bottom: 1.125rem;
+    }
+    .pstat:last-child { margin-bottom: 0; }
+    .pstat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.25rem;
+      font-weight: 300;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.625rem;
+    }
+    .pstat-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
+    .problem-prose p {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+    }
+    .problem-prose p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance badges ── */
+    .compliance-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.625rem;
+      margin-top: 2rem;
+    }
+    .comp-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      border: 1px solid var(--border-mid);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .comp-badge:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── Use case preview ── */
+    .usecase-card {
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .usecase-card:hover { border-color: var(--border-teal); transform: translateY(-3px); }
+    .uc-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.875rem;
+    }
+    .usecase-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.625rem;
+      line-height: 1.25;
+    }
+    .usecase-card p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; }
+    .uc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8125rem;
+      color: var(--teal);
+      margin-top: 1rem;
+      font-weight: 500;
+      transition: gap 0.2s;
+    }
+    .uc-link:hover { gap: 0.625rem; }
+
+    @media (max-width: 768px) {
+      .problem-layout { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 7rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="use-cases.html">Use Cases</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="contact.html" class="btn btn-teal btn-sm">Request access</a>
+  </div>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="nav-drawer">
+  <a href="index.html" class="active">Home</a>
+  <a href="platform.html">Platform</a>
+  <a href="use-cases.html">Use Cases</a>
+  <a href="about.html">About</a>
+  <a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a>
+  <a href="contact.html" class="btn btn-teal btn-sm nav-cta-mobile">Request access</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-radial"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">AI-native pharma R&amp;D platform</div>
+    <h1 class="display display-xl">
+      R&amp;D intelligence<br>that <em>holds up.</em>
+    </h1>
+    <p class="hero-sub">
+      Reprosia brings AI-driven rigor to pharmaceutical research —
+      from first analysis to regulatory submission. Built on open-source
+      foundations. Designed for compliance-first teams.
+    </p>
+    <div class="btn-group">
+      <a href="contact.html" class="btn btn-teal">Request early access</a>
+      <a href="platform.html" class="btn btn-ghost">See the platform</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">21 CFR</div><div class="hstat-label">Part 11 compliant</div></div>
+      <div><div class="hstat-num">ICH E9</div><div class="hstat-label">R1 estimand framework</div></div>
+      <div><div class="hstat-num">100%</div><div class="hstat-label">Audit trail coverage</div></div>
+      <div><div class="hstat-num">Open</div><div class="hstat-label">Source foundation</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">FDA 21 CFR Part 11</span>
+    <span class="marquee-item">ICH E9(R1) Estimands</span>
+    <span class="marquee-item">CDISC SDTM &amp; ADaM</span>
+    <span class="marquee-item">GxP Compliance</span>
+    <span class="marquee-item">Electronic Audit Trail</span>
+    <span class="marquee-item">IQ / OQ / PQ Validation</span>
+    <span class="marquee-item">EMA Standards</span>
+    <span class="marquee-item">Reproducibility</span>
+    <span class="marquee-item">eCTD Submissions</span>
+    <span class="marquee-item">FDA 21 CFR Part 11</span>
+    <span class="marquee-item">ICH E9(R1) Estimands</span>
+    <span class="marquee-item">CDISC SDTM &amp; ADaM</span>
+    <span class="marquee-item">GxP Compliance</span>
+    <span class="marquee-item">Electronic Audit Trail</span>
+    <span class="marquee-item">IQ / OQ / PQ Validation</span>
+    <span class="marquee-item">EMA Standards</span>
+    <span class="marquee-item">Reproducibility</span>
+    <span class="marquee-item">eCTD Submissions</span>
+  </div>
+</div>
+
+<!-- ─── PROBLEM ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">The problem</div>
+    <h2 class="display display-lg" style="margin-bottom:1rem">Pharma R&amp;D has a<br><em>reproducibility crisis.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3rem">Most clinical analyses cannot be reproduced. Regulatory submissions fail. Decisions are made on results that were never designed to be verified. Reprosia exists to fix this.</p>
+    <div class="problem-layout reveal">
+      <div>
+        <div class="pstat">
+          <div class="pstat-num">~70%</div>
+          <div class="pstat-text">of preclinical studies cannot be reproduced by independent teams — billions in wasted R&amp;D investment annually.</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-num">$50B+</div>
+          <div class="pstat-text">estimated annual cost of irreproducible research in biomedical sciences, including failed regulatory submissions.</div>
+        </div>
+      </div>
+      <div class="problem-prose">
+        <p>Regulatory agencies are tightening requirements. FDA and EMA now expect documented, auditable, reproducible analyses as standard — not exception.</p>
+        <p>Most teams rely on ad-hoc R scripts, undocumented environments, and manual validation processes that break at submission time. The cost is measured in delayed approvals, failed audits, and lost competitive advantage.</p>
+        <p>Reprosia automates the infrastructure of rigor — so your team can focus on the science, not the paperwork.</p>
+        <div class="compliance-badges">
+          <span class="comp-badge">21 CFR Part 11</span>
+          <span class="comp-badge">ICH E9(R1)</span>
+          <span class="comp-badge">GxP</span>
+          <span class="comp-badge">CDISC</span>
+          <span class="comp-badge">eCTD</span>
+          <span class="comp-badge">EMA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLATFORM OVERVIEW ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">The platform</div>
+    <h2 class="display display-lg" style="margin-bottom:1rem">Three pillars of<br><em>analytical integrity.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:500px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">Not a reporting tool. The infrastructure layer that makes pharmaceutical analyses trustworthy from day one. <a href="platform.html" style="color:var(--teal)">Explore the platform →</a></p>
+    <div class="grid-3">
+      <div class="card card-accent reveal reveal-d1">
+        <div class="card-icon">VAL</div>
+        <h3>Validate</h3>
+        <p>AI-assisted IQ/OQ/PQ validation of your R environment. Continuous audit trails compliant with 21 CFR Part 11. Every function call documented automatically.</p>
+        <ul class="feat-list">
+          <li>21 CFR Part 11 audit trail</li>
+          <li>Package qualification (IQ/OQ/PQ)</li>
+          <li>System validation reports</li>
+        </ul>
+      </div>
+      <div class="card card-accent reveal reveal-d2">
+        <div class="card-icon">REP</div>
+        <h3>Reproduce</h3>
+        <p>Locked package versions, containerised execution, drift detection. Your results today match your results at submission — regardless of environment or time.</p>
+        <ul class="feat-list">
+          <li>Environment lockfiles</li>
+          <li>Drift detection alerts</li>
+          <li>Cross-environment validation</li>
+        </ul>
+      </div>
+      <div class="card card-accent reveal reveal-d3">
+        <div class="card-icon">SUB</div>
+        <h3>Submit</h3>
+        <p>Regulatory-ready outputs for FDA and EMA. CDISC-compatible structures, ICH E9(R1) estimand documentation, eCTD-ready packages.</p>
+        <ul class="feat-list">
+          <li>SDTM &amp; ADaM outputs</li>
+          <li>Estimand specification docs</li>
+          <li>eCTD submission packages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── USE CASE PREVIEW ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">Use cases</div>
+    <h2 class="display display-lg" style="margin-bottom:1rem">Built for teams that<br><em>cannot afford errors.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:500px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">From Phase I to NDA. From clinical biostatistics to SAS migration. <a href="use-cases.html" style="color:var(--teal)">See all use cases →</a></p>
+    <div class="grid-2 reveal">
+      <div class="usecase-card">
+        <div class="uc-label">Pharma &amp; Biotech</div>
+        <h3>Clinical trial statistical analysis</h3>
+        <p>Reproducible SAPs, locked environments at database freeze, automated audit trails for DSMB and regulatory review. From Phase I to NDA/BLA.</p>
+        <a href="use-cases.html#clinical" class="uc-link">Learn more →</a>
+      </div>
+      <div class="usecase-card">
+        <div class="uc-label">Regulatory Affairs</div>
+        <h3>Submission-ready R packages</h3>
+        <p>Validate your R environment to agency standards. Generate IQ/OQ/PQ documentation automatically. Never fail a submission audit again.</p>
+        <a href="use-cases.html#regulatory" class="uc-link">Learn more →</a>
+      </div>
+      <div class="usecase-card">
+        <div class="uc-label">CRO Teams</div>
+        <h3>Multi-sponsor reproducibility</h3>
+        <p>Consistent validation across multiple sponsor environments. Deliver reproducible analyses regardless of client infrastructure.</p>
+        <a href="use-cases.html#cro" class="uc-link">Learn more →</a>
+      </div>
+      <div class="usecase-card">
+        <div class="uc-label">SAS → R Migration</div>
+        <h3>Regulated environment transition</h3>
+        <p>Migrate from SAS to R without losing compliance posture. Automated equivalence testing and parallel validation.</p>
+        <a href="use-cases.html#migration" class="uc-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-strip section-alt">
+  <div class="cta-strip-glow"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="eyebrow" style="justify-content:center">Early access</div>
+    <h2 class="display display-md" style="text-align:center;margin-bottom:1rem">Ready to make your R analyses<br><em>regulation-ready?</em></h2>
+    <p class="lead" style="text-align:center">Reprosia is in private early access. We are working with a small number of pharma and biotech teams to shape the platform.</p>
+    <div class="btn-group" style="justify-content:center">
+      <a href="contact.html" class="btn btn-teal">Request early access</a>
+      <a href="https://reprostats.org" class="btn btn-ghost" target="_blank" rel="noopener">Explore open source →</a>
+    </div>
+    <p class="cta-email">Or reach us at <a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></p>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+      <p>AI-native pharma R&amp;D platform built on open-source foundations.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="platform.html">Overview</a></li>
+        <li><a href="platform.html#validate">Validate</a></li>
+        <li><a href="platform.html#reproduce">Reproduce</a></li>
+        <li><a href="platform.html#submit">Submit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="use-cases.html">Use Cases</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://github.com/repro-stats" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://reprostats.org" target="_blank" rel="noopener">ReproStats</a></li>
+        <li><a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 ReproStats BV · Brussels, Belgium</span>
+    <span class="footer-copy">reprosia.com</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

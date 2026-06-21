@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Reprosia</title>
+  <meta name="description" content="Request early access to Reprosia. We're working with a small number of pharma and biotech teams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Contact layout ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ── Form ── */
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.375rem;
+    }
+    .form-sub {
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 1.375rem; }
+    .field label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border-mid);
+      border-radius: 5px;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--text-soft); }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-dim);
+    }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .field select option { background: var(--surface-2); }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--teal);
+      color: var(--text-inv);
+      border: none;
+      border-radius: 5px;
+      padding: 0.9375rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.25s, background 0.2s !important;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--teal-glow);
+    }
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ── Contact info ── */
+    .contact-info .eyebrow { margin-bottom: 1.5rem; }
+    .contact-info-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-info-item:last-child { border-bottom: none; }
+    .ci-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .ci-value {
+      font-size: 0.9375rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .ci-value a { color: var(--teal); }
+    .ci-note {
+      font-size: 0.8125rem;
+      color: var(--text-mid);
+      margin-top: 0.375rem;
+      line-height: 1.6;
+    }
+
+    .process-steps { margin-top: 2.5rem; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .process-step:last-child { border-bottom: none; }
+    .ps-num {
+      width: 2rem; height: 2rem;
+      background: var(--teal-dim);
+      border: 1px solid var(--border-teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .ps-text h4 { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+    .ps-text p  { font-size: 0.8125rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 1rem; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.375rem 0;
+      cursor: pointer;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+      user-select: none;
+      list-style: none;
+    }
+    .faq-q:hover { color: var(--teal); }
+    .faq-icon {
+      width: 20px; height: 20px;
+      border: 1px solid var(--border-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      transition: border-color 0.2s, transform 0.25s, color 0.2s !important;
+    }
+    .faq-item.open .faq-icon {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      display: none;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      padding-bottom: 1.375rem;
+      font-weight: 300;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="use-cases.html">Use Cases</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="contact.html" class="btn btn-teal btn-sm active">Request access</a>
+  </div>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<nav class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="platform.html">Platform</a>
+  <a href="use-cases.html">Use Cases</a>
+  <a href="about.html">About</a>
+  <a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a>
+  <a href="contact.html" class="btn btn-teal btn-sm nav-cta-mobile">Request access</a>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow ruled">Early access</div>
+    <h1 class="display display-lg">Let's talk about<br>your <em>R environment.</em></h1>
+    <p class="lead">Reprosia is in private early access. We work with a small number of pharma and biotech teams to build the right solution. No sales process — just a direct conversation about your needs.</p>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- FORM -->
+      <div class="contact-form reveal">
+        <div class="form-title">Request early access</div>
+        <div class="form-sub">Tell us about your team and we'll be in touch within 48 hours.</div>
+        <form action="mailto:ndoh@reprosia.com" method="POST" enctype="text/plain">
+          <div class="field-row">
+            <div class="field">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" name="first_name" placeholder="Ndoh" required>
+            </div>
+            <div class="field">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" name="last_name" placeholder="Penn" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" placeholder="you@yourcompany.com" required>
+          </div>
+          <div class="field">
+            <label for="company">Company / organisation</label>
+            <input type="text" id="company" name="company" placeholder="Pharma Co." required>
+          </div>
+          <div class="field">
+            <label for="role">Your role</label>
+            <select id="role" name="role">
+              <option value="">Select your role</option>
+              <option>Clinical Biostatistician</option>
+              <option>Statistical Programmer</option>
+              <option>Regulatory Affairs</option>
+              <option>R&amp;D IT / Validation</option>
+              <option>Quality Assurance</option>
+              <option>R&amp;D Leadership / CTO</option>
+              <option>CRO Statistician</option>
+              <option>Academic Researcher</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="usecase">Primary use case</label>
+            <select id="usecase" name="use_case">
+              <option value="">Select use case</option>
+              <option>Clinical trial statistical analysis</option>
+              <option>Regulatory submission (IQ/OQ/PQ)</option>
+              <option>SAS → R migration</option>
+              <option>CRO multi-sponsor management</option>
+              <option>Reproducibility audit</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Tell us about your situation</label>
+            <textarea id="message" name="message" placeholder="What reproducibility or compliance challenge are you trying to solve? What does your current R environment look like?"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send request</button>
+          <p class="form-note">Your information is used only to respond to your request. We do not share it with third parties. Data processed under EU GDPR within Belgium.</p>
+        </form>
+      </div>
+
+      <!-- INFO -->
+      <div class="contact-info reveal reveal-d2">
+        <div class="eyebrow ruled">What to expect</div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="ps-num">01</div>
+            <div class="ps-text">
+              <h4>We review your request</h4>
+              <p>Within 48 hours, we'll review what you've shared and assess fit for early access.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="ps-num">02</div>
+            <div class="ps-text">
+              <h4>An initial conversation</h4>
+              <p>30 minutes with the founder. We'll understand your R environment, regulatory context, and what you're trying to solve.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="ps-num">03</div>
+            <div class="ps-text">
+              <h4>Tailored platform demo</h4>
+              <p>We'll show you Reprosia applied to your specific use case, not a generic product demo.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="ps-num">04</div>
+            <div class="ps-text">
+              <h4>Early access onboarding</h4>
+              <p>Selected teams get hands-on access with direct support from the Reprosia team throughout.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:3rem">
+          <div class="contact-info-item">
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></div>
+            <div class="ci-note">For direct enquiries, partnership discussions, or press.</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-label">Open source</div>
+            <div class="ci-value"><a href="https://reprostats.org" target="_blank" rel="noopener">reprostats.org ↗</a></div>
+            <div class="ci-note">Explore reproducr and the full open-source package ecosystem.</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-label">GitHub</div>
+            <div class="ci-value"><a href="https://github.com/repro-stats" target="_blank" rel="noopener">github.com/repro-stats ↗</a></div>
+            <div class="ci-note">All open-source packages, issues, and contributions.</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Brussels, Belgium</div>
+            <div class="ci-note">ReproStats BV. EU data residency. GDPR compliant.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">Frequently asked</div>
+    <h2 class="display display-md" style="margin-bottom:3rem">Questions we<br><em>hear most often.</em></h2>
+    <div style="max-width:720px">
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q">
+            Is Reprosia available now?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Reprosia is currently in private early access. We are working with a small number of pharma and biotech teams to refine the platform before a wider release. Submit a request and we'll assess fit and timeline together.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            Do I need to migrate away from my existing R setup?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">No. Reprosia wraps around your existing R environment — your scripts, packages, and data pipelines stay where they are. We add the audit, validation, and submission layer on top, not instead of what you already have.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            How does Reprosia handle sensitive clinical trial data?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Reprosia is operated by ReproStats BV, a Belgian-registered entity. All data processing occurs within EU jurisdiction, GDPR compliant by default. We support on-premise deployment options for teams with strict data residency requirements. Clinical data never leaves your controlled environment unless you explicitly choose to share it.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            Is the IQ/OQ/PQ documentation acceptable to FDA and EMA?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Reprosia generates validation documentation aligned with FDA 21 CFR Part 11, EMA Annex 11, and GAMP 5 computer system validation guidance. The documentation format is designed to satisfy regulatory reviewers. That said, acceptability ultimately depends on your specific regulatory context and submission, and we recommend review by your regulatory affairs team.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            Can Reprosia help with SAS to R migration?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Yes. This is one of our core use cases. Reprosia provides automated equivalence testing between SAS and R outputs, migration audit trails documenting every difference and its justification, and a parallel validation period where both environments run simultaneously. The migration package is designed to produce agency-acceptable evidence of the transition.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            How is Reprosia different from just using renv and git?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">renv and git are excellent tools and Reprosia builds on them. The difference is the regulatory layer: IQ/OQ/PQ documentation, 21 CFR Part 11-compliant audit trails, electronic signatures, risk scoring, drift detection across environments, ICH E9(R1) estimand documentation, and eCTD-ready submission packaging. renv locks your packages; Reprosia certifies your environment and produces the evidence that regulators require.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            What is the relationship between Reprosia and ReproStats?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">ReproStats (reprostats.org) is the open-source project — four R packages (reproducr, regulog, lineager, estimandr) available on CRAN and GitHub. Reprosia is the enterprise platform built on that foundation, adding the AI audit engine, environment management, submission tooling, and enterprise workflows. Both are operated by ReproStats BV. The open-source packages remain free and will always be maintained independently.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+      <p>AI-native pharma R&amp;D platform built on open-source foundations.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="platform.html#validate">Validate</a></li><li><a href="platform.html#reproduce">Reproduce</a></li><li><a href="platform.html#submit">Submit</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="use-cases.html">Use Cases</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://github.com/repro-stats" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://reprostats.org" target="_blank" rel="noopener">ReproStats</a></li><li><a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 ReproStats BV · Brussels, Belgium</span>
+    <span class="footer-copy">reprosia.com</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

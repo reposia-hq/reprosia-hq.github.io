@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Reprosia</title>
+  <meta name="description" content="Why Reprosia exists. The mission, the founder, and the open-source foundation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Mission block ── */
+    .mission-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .mission-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.4;
+      border-left: 2px solid var(--teal);
+      padding-left: 1.75rem;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+    .mission-prose p {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 1.375rem;
+      font-weight: 300;
+    }
+    .mission-prose p:last-child { margin-bottom: 0; }
+    .mission-prose strong { color: var(--text); font-weight: 500; }
+    .mission-prose a { color: var(--teal); }
+
+    /* ── Stats ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stat-cell {
+      padding: 2rem 1.75rem;
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell:hover { background: var(--teal-dim); }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-l { font-size: 0.8125rem; color: var(--text-mid); line-height: 1.5; }
+
+    /* ── Values ── */
+    .value-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .value-item:last-child { border-bottom: none; }
+    .value-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .value-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .value-item p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.75; }
+
+    /* ── Founder ── */
+    .founder-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    .founder-avatar {
+      width: 180px; height: 180px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .founder-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--teal);
+    }
+    .founder-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .founder-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .founder-bio p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .founder-bio p:last-child { margin-bottom: 0; }
+    .founder-links { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+
+    /* ── OSS section ── */
+    .oss-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .oss-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      transition: border-color 0.3s;
+      margin-bottom: 1rem;
+    }
+    .oss-card:last-child { margin-bottom: 0; }
+    .oss-card:hover { border-color: var(--border-teal); }
+    .oss-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.375rem;
+    }
+    .oss-desc { font-size: 0.8125rem; color: var(--text-mid); line-height: 1.65; }
+    .oss-status {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      margin-top: 0.75rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 900px) {
+      .mission-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-cell:nth-child(2n) { border-right: none; }
+      .stat-cell:nth-child(1),
+      .stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+      .founder-card { grid-template-columns: 1fr; }
+      .founder-avatar { width: 120px; height: 120px; }
+      .founder-initials { font-size: 2.25rem; }
+      .oss-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-cell:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="use-cases.html">Use Cases</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="contact.html" class="btn btn-teal btn-sm">Request access</a>
+  </div>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<nav class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="platform.html">Platform</a>
+  <a href="use-cases.html">Use Cases</a>
+  <a href="about.html" class="active">About</a>
+  <a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a>
+  <a href="contact.html" class="btn btn-teal btn-sm nav-cta-mobile">Request access</a>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow ruled">About Reprosia</div>
+    <h1 class="display display-lg">Why we built<br>this <em>platform.</em></h1>
+    <p class="lead">Pharmaceutical data science has a reproducibility problem. Reprosia exists to fix the infrastructure layer that every regulated analysis depends on — and nobody else was building.</p>
+  </div>
+</section>
+
+<!-- ─── MISSION ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">Our mission</div>
+    <div class="mission-layout reveal">
+      <div>
+        <div class="mission-pull">
+          "Make reproducibility and regulatory compliance the path of least resistance for every pharma R&amp;D team."
+        </div>
+        <div class="mission-prose">
+          <p>Reprosia started with a simple observation: <strong>most clinical analyses cannot be reproduced</strong>. Not because the science was wrong, but because the R environment wasn't documented, the package versions weren't locked, and nobody wrote down exactly what happened between raw data and submission output.</p>
+          <p>This is a solvable problem. The tools exist in open-source R. The regulatory requirements are well-understood. What was missing was a platform that connected them — making compliance automatic rather than aspirational.</p>
+          <p>We built Reprosia to be that platform. AI-native, built on open-source foundations, designed from day one for the teams that cannot afford errors: pharma, biotech, and CRO statisticians working under FDA and EMA oversight.</p>
+        </div>
+      </div>
+      <div class="mission-prose">
+        <p><strong>We are not a regulatory consultancy</strong> that happens to use software. We are a technology company that deeply understands regulation. The distinction matters: our goal is to encode regulatory expertise into software that scales — not to bill consulting hours indefinitely.</p>
+        <p>The open-source foundation — <strong>reproducr, regulog, lineager, and estimandr</strong> — is our commitment to the community. These packages solve real problems for individual statisticians and teams. Reprosia is the platform that makes those solutions work at enterprise scale, with the AI audit layer, environment management, and submission tooling that regulated environments require.</p>
+        <p>We are based in <strong>Brussels, Belgium</strong>, registered as ReproStats BV. We work with pharma and biotech teams across Europe and globally. EU data residency is built in, not bolted on.</p>
+        <p>This is early days. We are working with a small number of teams in private early access. If reproducibility is a problem you are trying to solve, <a href="contact.html">we want to talk to you</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section class="section-sm section-surface">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-cell">
+        <div class="stat-n">0.2.1</div>
+        <div class="stat-l">reproducr current version on CRAN</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">4</div>
+        <div class="stat-l">open-source packages in the ecosystem</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">97%</div>
+        <div class="stat-l">test coverage across all packages</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">EU</div>
+        <div class="stat-l">data residency — Belgium, GDPR compliant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VALUES ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">What we believe</div>
+    <h2 class="display display-md" style="margin-bottom:3.5rem">The principles that<br><em>guide every decision.</em></h2>
+    <div style="max-width:680px" class="reveal">
+      <div class="value-item">
+        <div class="value-num">01</div>
+        <div>
+          <h3>Open source first</h3>
+          <p>The reproducibility problem belongs to the community. Our packages are open-source, peer-reviewed, and will remain so. The platform adds enterprise capabilities — it does not hide the science behind a paywall.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">02</div>
+        <div>
+          <h3>Compliance is not optional</h3>
+          <p>We don't build workarounds for regulatory requirements. We build tools that make compliance easier to achieve — and harder to accidentally skip. The goal is a world where doing the right thing is also the easiest thing.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">03</div>
+        <div>
+          <h3>Statisticians are scientists, not sysadmins</h3>
+          <p>Clinical statisticians should be thinking about their estimand strategy, not debugging R package dependencies. Reprosia handles the infrastructure so people can focus on the science.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">04</div>
+        <div>
+          <h3>Trust is earned by transparency</h3>
+          <p>In regulated environments, every claim must be verifiable. We hold ourselves to the same standard: our validation methods are documented, our audit trails are complete, and our outputs can always be traced to source.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">05</div>
+        <div>
+          <h3>AI in service of rigor</h3>
+          <p>We use AI to make compliance more thorough, not less rigorous. AI is the audit engine — it catches what humans miss, at a scale no manual process can match. It does not replace regulatory judgment; it extends it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOUNDER ─── -->
+<section class="section section-surface">
+  <div class="container">
+    <div class="eyebrow ruled">The team</div>
+    <h2 class="display display-md" style="margin-bottom:3rem">Built by someone who<br><em>lived the problem.</em></h2>
+    <div class="founder-card reveal">
+      <div class="founder-avatar">
+        <div class="founder-initials">NP</div>
+      </div>
+      <div>
+        <div class="founder-name">Ndoh Penn</div>
+        <div class="founder-role">Founder · ReproStats BV &amp; Reprosia</div>
+        <div class="founder-bio">
+          <p>Biostatistician and R developer based in Brussels, Belgium. Before building Reprosia, Ndoh spent years working on clinical trial analyses — watching submissions fail not because the science was flawed, but because the computational infrastructure around it wasn't documented or reproducible.</p>
+          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — four open-source packages covering audit, provenance, logging, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
+          <p>Ndoh holds deep expertise in ICH E9(R1) estimand methodology, 21 CFR Part 11 compliance for R environments, and CDISC data standards for regulatory submissions.</p>
+        </div>
+        <div class="founder-links">
+          <a href="https://github.com/repro-stats" class="btn btn-outline btn-sm" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="mailto:ndoh@reprosia.com" class="btn btn-outline btn-sm">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OPEN SOURCE ─── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow ruled">Open-source foundation</div>
+    <h2 class="display display-md" style="margin-bottom:1rem">ReproStats: the foundation<br><em>beneath Reprosia.</em></h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">Reprosia is built on four open-source R packages, peer-reviewed and available on CRAN and GitHub. The platform adds the AI audit engine, environment management, and enterprise workflow — on top of a foundation that belongs to everyone.</p>
+    <div class="oss-layout reveal">
+      <div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">reproducr</div>
+            <span class="oss-status badge badge-teal">On CRAN</span>
+          </div>
+          <div class="oss-desc">Script audit, environment certification, risk scoring and drift detection for regulated R analyses. The core reproducibility engine.</div>
+        </div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">regulog</div>
+            <span class="oss-status badge badge-blue">In development</span>
+          </div>
+          <div class="oss-desc">21 CFR Part 11-compliant electronic audit logging for R. Tamper-evident, user-attributed, timestamp-verified action records.</div>
+        </div>
+      </div>
+      <div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">lineager</div>
+            <span class="oss-status badge badge-blue">In development</span>
+          </div>
+          <div class="oss-desc">Row-level data provenance for clinical datasets. Track every transformation from raw SDTM to analysis-ready ADaM with full traceability.</div>
+        </div>
+        <div class="oss-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="oss-name">estimandr</div>
+            <span class="oss-status badge badge-blue">In development</span>
+          </div>
+          <div class="oss-desc">ICH E9(R1) estimand framework for R. Define, document, and implement your estimand strategy directly in your analysis pipeline.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem">
+      <a href="https://reprostats.org" class="btn btn-outline" target="_blank" rel="noopener">Explore reprostats.org →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-strip section-alt">
+  <div class="cta-strip-glow"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="eyebrow" style="justify-content:center">Get in touch</div>
+    <h2 class="display display-md" style="text-align:center;margin-bottom:1rem">We are building this<br><em>with you.</em></h2>
+    <p class="lead" style="text-align:center">Early access is limited. We work directly with every team to understand their environment and tailor the platform to their regulatory context.</p>
+    <div class="btn-group" style="justify-content:center">
+      <a href="contact.html" class="btn btn-teal">Request early access</a>
+      <a href="use-cases.html" class="btn btn-ghost">See who we help →</a>
+    </div>
+    <p class="cta-email">Or email <a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></p>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Repro<span>sia</span></a>
+      <p>AI-native pharma R&amp;D platform built on open-source foundations.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="platform.html#validate">Validate</a></li><li><a href="platform.html#reproduce">Reproduce</a></li><li><a href="platform.html#submit">Submit</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="use-cases.html">Use Cases</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://reprostats.org" target="_blank" rel="noopener">Open Source ↗</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://github.com/repro-stats" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://reprostats.org" target="_blank" rel="noopener">ReproStats</a></li><li><a href="mailto:ndoh@reprosia.com">ndoh@reprosia.com</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 ReproStats BV · Brussels, Belgium</span>
+    <span class="footer-copy">reprosia.com</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
