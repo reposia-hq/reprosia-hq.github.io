@@ -258,7 +258,7 @@
       <!-- FORM -->
       <div class="contact-form reveal">
         <div class="form-title">Request early access</div>
-        <div class="form-sub">Tell us about your team and we'll be in touch within 48 hours.</div>
+        <div class="form-sub">Tell us about your team and we'll be in touch within 48 hours.<br><span style="font-size:0.78rem;color:var(--text-soft)"><span style="color:#dc5040">*</span> Required fields</span></div>
         <!-- Formspree success message -->
         <div data-fs-success style="padding:1.5rem;background:var(--teal-dim);border:1px solid var(--border-teal);border-radius:8px;margin-bottom:1.5rem">
           <p style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--teal);letter-spacing:0.08em;margin-bottom:0.375rem">✓ REQUEST RECEIVED</p>
@@ -272,27 +272,27 @@
         <form id="reprosia-contact">
           <div class="field-row">
             <div class="field">
-              <label for="fname">First name</label>
-              <input type="text" id="fname" name="first_name" placeholder="Ndoh" required data-fs-field>
+              <label for="fname">First name <span style="color:#dc5040">*</span></label>
+              <input type="text" id="fname" name="first_name" placeholder="First name" required data-fs-field>
               <span data-fs-error="first_name" style="font-size:0.75rem;color:#dc5040;margin-top:0.25rem;display:block"></span>
             </div>
             <div class="field">
-              <label for="lname">Last name</label>
-              <input type="text" id="lname" name="last_name" placeholder="Penn" required data-fs-field>
+              <label for="lname">Last name <span style="color:#dc5040">*</span></label>
+              <input type="text" id="lname" name="last_name" placeholder="Last name" required data-fs-field>
               <span data-fs-error="last_name" style="font-size:0.75rem;color:#dc5040;margin-top:0.25rem;display:block"></span>
             </div>
           </div>
           <div class="field">
-            <label for="email">Work email</label>
+            <label for="email">Work email <span style="color:#dc5040">*</span></label>
             <input type="email" id="email" name="email" placeholder="you@yourcompany.com" required data-fs-field>
             <span data-fs-error="email" style="font-size:0.75rem;color:#dc5040;margin-top:0.25rem;display:block"></span>
           </div>
           <div class="field">
-            <label for="company">Company / organisation</label>
+            <label for="company">Company / organisation <span style="color:#dc5040">*</span></label>
             <input type="text" id="company" name="company" placeholder="Pharma Co." required data-fs-field>
           </div>
           <div class="field">
-            <label for="role">Your role</label>
+            <label for="role">Your role <span style="color:var(--text-soft);font-size:0.6rem;letter-spacing:0.1em">(optional)</span></label>
             <select id="role" name="role" data-fs-field>
               <option value="">Select your role</option>
               <option>Clinical Biostatistician</option>
@@ -307,7 +307,7 @@
             </select>
           </div>
           <div class="field">
-            <label for="usecase">Primary use case</label>
+            <label for="usecase">Primary use case <span style="color:var(--text-soft);font-size:0.6rem;letter-spacing:0.1em">(optional)</span></label>
             <select id="usecase" name="use_case" data-fs-field>
               <option value="">Select use case</option>
               <option>Clinical trial statistical analysis</option>
@@ -320,7 +320,7 @@
             </select>
           </div>
           <div class="field">
-            <label for="message">Tell us about your situation</label>
+            <label for="message">Tell us about your situation <span style="color:var(--text-soft);font-size:0.6rem;letter-spacing:0.1em">(optional)</span></label>
             <textarea id="message" name="message" placeholder="What reproducibility or compliance challenge are you trying to solve? What does your current R environment look like?" data-fs-field></textarea>
             <span data-fs-error="message" style="font-size:0.75rem;color:#dc5040;margin-top:0.25rem;display:block"></span>
           </div>
