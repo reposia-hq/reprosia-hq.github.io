@@ -142,39 +142,6 @@
     .founder-bio p:last-child { margin-bottom: 0; }
     .founder-links { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
 
-    /* ── OSS section ── */
-    .oss-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    .oss-card {
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      transition: border-color 0.3s;
-      margin-bottom: 1rem;
-    }
-    .oss-card:last-child { margin-bottom: 0; }
-    .oss-card:hover { border-color: var(--border-teal); }
-    .oss-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.375rem;
-    }
-    .oss-desc { font-size: 0.8125rem; color: var(--text-mid); line-height: 1.65; }
-    .oss-status {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
-      margin-top: 0.75rem;
-      display: inline-block;
-    }
 
     @media (max-width: 900px) {
       .mission-layout { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -185,7 +152,6 @@
       .founder-card { grid-template-columns: 1fr; }
       .founder-avatar { width: 120px; height: 120px; }
       .founder-initials { font-size: 2.25rem; }
-      .oss-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .stats-grid { grid-template-columns: 1fr; }
@@ -268,16 +234,16 @@
         <div class="stat-l">reproducr current version on CRAN</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-n">5</div>
-        <div class="stat-l">open-source packages in the ecosystem</div>
+        <div class="stat-n">2</div>
+        <div class="stat-l">packages live on CRAN today</div>
       </div>
       <div class="stat-cell">
         <div class="stat-n">97%</div>
-        <div class="stat-l">test coverage across all packages</div>
+        <div class="stat-l">test coverage in reproducr</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-n">EU</div>
-        <div class="stat-l">based in Brussels, Belgium</div>
+        <div class="stat-n">5</div>
+        <div class="stat-l">packages in the ecosystem</div>
       </div>
     </div>
   </div>
@@ -293,7 +259,7 @@
         <div class="value-num">01</div>
         <div>
           <h3>Open source first</h3>
-          <p>The reproducibility problem belongs to the community. Our packages are open-source, peer-reviewed, and will remain so. The platform adds enterprise capabilities — it does not hide the science behind a paywall.</p>
+          <p>The reproducibility problem belongs to the community. Our packages are open-source, openly developed, and will remain so. The platform adds enterprise capabilities — it does not hide the science behind a paywall.</p>
         </div>
       </div>
       <div class="value-item">
@@ -314,7 +280,7 @@
         <div class="value-num">04</div>
         <div>
           <h3>Trust is earned by transparency</h3>
-          <p>In regulated environments, every claim must be verifiable. We hold ourselves to the same standard: our validation methods are documented, our audit trails are complete, and our outputs can always be traced to source.</p>
+          <p>In regulated environments, every claim must be verifiable. We hold ourselves to the same standard: our methods are openly documented, our outputs are traceable, and our claims are verifiable.</p>
         </div>
       </div>
       <div class="value-item">
@@ -342,11 +308,11 @@
         <div class="founder-role">Founder · Reprosia &amp; ReproStats</div>
         <div class="founder-bio">
           <p>Biostatistician and R developer based in Brussels, Belgium. Before building Reprosia, Ndoh spent years working on clinical trial analyses — watching submissions fail not because the science was flawed, but because the computational infrastructure around it wasn't documented or reproducible.</p>
-          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — five open-source packages covering Bayesian prior methodology, reproducibility, audit logging, data provenance, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
+          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — five openly developed R packages covering Bayesian prior methodology, reproducibility, audit logging, data provenance, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
           <p>Ndoh's expertise spans ICH E9(R1) estimand methodology, Bayesian methods for clinical trials, 21 CFR Part 11 compliance for R environments, and CDISC data standards for regulatory submissions.</p>
         </div>
         <div class="founder-links">
-          <a href="https://github.com/repro-stats" class="btn btn-outline btn-sm" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/ndohpenngit" class="btn btn-outline btn-sm" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="mailto:team@reprosia.com" class="btn btn-outline btn-sm">Email</a>
         </div>
       </div>
@@ -359,58 +325,14 @@
   <div class="container">
     <div class="eyebrow ruled">Open-source foundation</div>
     <h2 class="display display-md" style="margin-bottom:1rem">ReproStats: the foundation<br><em>beneath Reprosia.</em></h2>
-    <p style="font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:3.5rem">Reprosia is built on five open-source R packages, peer-reviewed and available on CRAN and GitHub. The platform adds the AI audit engine, environment management, and enterprise workflow — on top of a foundation that belongs to everyone.</p>
-    <div class="oss-layout reveal">
-      <div>
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">bayprior</div>
-            <span class="oss-status badge badge-teal">On CRAN</span>
-          </div>
-          <div class="oss-desc">Structured Bayesian prior elicitation, conflict diagnostics, sensitivity analysis, and regulatory reporting. Aligned with FDA 2026 Bayesian draft guidance. Includes interactive Shiny app.</div>
-        </div>
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">reproducr</div>
-            <span class="oss-status badge badge-teal">On CRAN</span>
-          </div>
-          <div class="oss-desc">Script audit, environment certification, risk scoring and drift detection for regulated R analyses. The core reproducibility engine.</div>
-        </div>
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">bayprior</div>
-            <span class="oss-status badge badge-teal">On CRAN</span>
-          </div>
-          <div class="oss-desc">Structured Bayesian prior elicitation, conflict diagnostics, sensitivity analysis, and regulatory report generation. Directly addresses FDA 2026 Bayesian guidance. Includes interactive Shiny app.</div>
-        </div>
-
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">regulog</div>
-            <span class="oss-status badge badge-blue">In development</span>
-          </div>
-          <div class="oss-desc">21 CFR Part 11-compliant electronic audit logging for R. Tamper-evident, user-attributed, timestamp-verified action records.</div>
-        </div>
-      </div>
-      <div>
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">lineager</div>
-            <span class="oss-status badge badge-blue">In development</span>
-          </div>
-          <div class="oss-desc">Row-level data provenance for clinical datasets. Track every transformation from raw SDTM to analysis-ready ADaM with full traceability.</div>
-        </div>
-        <div class="oss-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="oss-name">estimandr</div>
-            <span class="oss-status badge badge-blue">In development</span>
-          </div>
-          <div class="oss-desc">ICH E9(R1) estimand framework for R. Define, document, and implement your estimand strategy directly in your analysis pipeline.</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:2.5rem">
-      <a href="https://reprostats.org" class="btn btn-outline" target="_blank" rel="noopener">Explore reprostats.org →</a>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:640px;line-height:1.8;font-weight:300;margin-bottom:1.5rem">
+      Reprosia is built on five openly developed R packages — <strong style="color:var(--text)">bayprior</strong>, <strong style="color:var(--text)">reproducr</strong>, <strong style="color:var(--text)">regulog</strong>, <strong style="color:var(--text)">lineager</strong>, and <strong style="color:var(--text)">estimandr</strong>. Two are live on CRAN today; the remaining three are in active development. The platform adds the AI-assisted audit engine, environment management, and regulatory submission tooling on top of a foundation that belongs to everyone.
+    </p>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:640px;line-height:1.8;font-weight:300;margin-bottom:2.5rem">
+      Full documentation, install instructions, vignettes, and contribution guidelines live at <a href="https://reprostats.org" style="color:var(--teal)" target="_blank" rel="noopener">reprostats.org</a>.
+    </p>
+    <div class="reveal">
+      <a href="https://reprostats.org" class="btn btn-outline" target="_blank" rel="noopener">Explore the open-source ecosystem →</a>
     </div>
   </div>
 </section>
