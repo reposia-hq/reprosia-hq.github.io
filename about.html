@@ -80,17 +80,15 @@
     .founder-avatar {
       width: 180px; height: 180px;
       border-radius: 8px;
-      background: var(--surface-2);
+      overflow: hidden;
       border: 1px solid var(--border-teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-shrink: 0;
     }
-    .founder-initials {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--teal);
+    .founder-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .founder-name {
       font-family: 'Cormorant Garamond', serif;
@@ -123,7 +121,6 @@
 
       .founder-card { grid-template-columns: 1fr; }
       .founder-avatar { width: 120px; height: 120px; }
-      .founder-initials { font-size: 2.25rem; }
     }
     @media (max-width: 640px) {
 
@@ -166,7 +163,7 @@
   <div class="page-hero-inner">
     <div class="eyebrow ruled">About Reprosia</div>
     <h1 class="display display-lg">Why we built<br>this <em>platform.</em></h1>
-    <p class="lead">Pharmaceutical data science has a reproducibility problem. Reprosia exists to fix the infrastructure layer that every regulated analysis depends on — and nobody else was building.</p>
+    <p class="lead">Pharmaceutical data science has a reproducibility problem. Reprosia exists to build the infrastructure layer that makes regulated analyses trustworthy by design.</p>
   </div>
 </section>
 
@@ -180,8 +177,8 @@
           "Make reproducibility and regulatory compliance the path of least resistance for every pharma R&amp;D team."
         </div>
         <div class="mission-prose">
-          <p>Reprosia started with a simple observation: <strong>most clinical analyses cannot be reproduced</strong>. Not because the science was wrong, but because the R environment wasn't documented, the package versions weren't locked, and nobody wrote down exactly what happened between raw data and submission output.</p>
-          <p>This is a solvable problem. The tools exist in open-source R. The regulatory requirements are well-understood. What was missing was a platform that connected them — making compliance automatic rather than aspirational.</p>
+          <p>Reprosia started with a clear observation: <strong>reproducibility in clinical analyses is harder than it should be</strong>. R environments go undocumented, package versions drift, and the steps between raw data and submission output are rarely captured in a way that can be independently verified.</p>
+          <p>This is a solvable problem. The tools exist in open-source R. The regulatory requirements are well-understood. A platform that connected them — making compliance a natural outcome of the workflow rather than a separate effort — did not yet exist in the R ecosystem.</p>
           <p>We built Reprosia to be that platform. AI-native, built on open-source foundations, designed from day one for the teams that cannot afford errors: pharma, biotech, and CRO statisticians working under FDA and EMA oversight.</p>
         </div>
       </div>
@@ -249,14 +246,14 @@
     <h2 class="display display-md" style="margin-bottom:3rem">Built by someone who<br><em>lived the problem.</em></h2>
     <div class="founder-card reveal">
       <div class="founder-avatar">
-        <div class="founder-initials">NP</div>
+        <img src="founder.jpg" alt="Ndoh Penn, Founder of Reprosia">
       </div>
       <div>
         <div class="founder-name">Ndoh Penn</div>
         <div class="founder-role">Founder · Reprosia &amp; ReproStats</div>
         <div class="founder-bio">
-          <p>Biostatistician and R developer based in Brussels, Belgium. Before building Reprosia, Ndoh spent years working on clinical trial analyses — watching submissions fail not because the science was flawed, but because the computational infrastructure around it wasn't documented or reproducible.</p>
-          <p>The experience led to a clear conclusion: the tools to fix this existed in open-source R, but nobody had assembled them into a platform that regulated teams could actually use. ReproStats started as that toolkit — five openly developed R packages covering Bayesian prior methodology, reproducibility, audit logging, data provenance, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
+          <p>Biostatistician and R developer based in Brussels, Belgium. Before building Reprosia, Ndoh spent years working on clinical trial analyses in regulated environments, developing deep familiarity with the reproducibility and compliance challenges that statistical teams face at submission time.</p>
+          <p>That experience shaped a conviction: the tools to address these challenges exist in open-source R, but bringing them together into a cohesive, enterprise-ready platform required deliberate design. ReproStats started as that toolkit — five openly developed R packages covering Bayesian prior methodology, reproducibility, audit logging, data provenance, and estimand specification. Reprosia is the platform layer that makes them enterprise-grade.</p>
           <p>Ndoh's expertise spans ICH E9(R1) estimand methodology, Bayesian methods for clinical trials, 21 CFR Part 11 compliance for R environments, and CDISC data standards for regulatory submissions.</p>
         </div>
         <div class="founder-links">
