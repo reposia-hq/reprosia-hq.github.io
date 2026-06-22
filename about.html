@@ -39,31 +39,6 @@
     .mission-prose strong { color: var(--text); font-weight: 500; }
     .mission-prose a { color: var(--teal); }
 
-    /* ── Stats ── */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .stat-cell {
-      padding: 2rem 1.75rem;
-      border-right: 1px solid var(--border);
-      transition: background 0.2s;
-    }
-    .stat-cell:last-child { border-right: none; }
-    .stat-cell:hover { background: var(--teal-dim); }
-    .stat-n {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      font-weight: 300;
-      color: var(--teal);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .stat-l { font-size: 0.8125rem; color: var(--text-mid); line-height: 1.5; }
 
     /* ── Values ── */
     .value-item {
@@ -145,18 +120,13 @@
 
     @media (max-width: 900px) {
       .mission-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .stat-cell:nth-child(2n) { border-right: none; }
-      .stat-cell:nth-child(1),
-      .stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+
       .founder-card { grid-template-columns: 1fr; }
       .founder-avatar { width: 120px; height: 120px; }
       .founder-initials { font-size: 2.25rem; }
     }
     @media (max-width: 640px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
-      .stat-cell:last-child { border-bottom: none; }
+
     }
   </style>
 </head>
@@ -225,29 +195,7 @@
   </div>
 </section>
 
-<!-- ─── STATS ─── -->
-<section class="section-sm section-surface">
-  <div class="container">
-    <div class="stats-grid reveal">
-      <div class="stat-cell">
-        <div class="stat-n">0.2.1</div>
-        <div class="stat-l">reproducr current version on CRAN</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n">2</div>
-        <div class="stat-l">packages live on CRAN today</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n">97%</div>
-        <div class="stat-l">test coverage in reproducr</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n">5</div>
-        <div class="stat-l">packages in the ecosystem</div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ─── VALUES ─── -->
 <section class="section">
