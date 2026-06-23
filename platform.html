@@ -265,18 +265,18 @@
           </div>
         </div>
         <div class="pillar-visual">
-          <div><span class="pv-label"># Validate R environment</span></div>
+          <div><span class="pv-label"># Audit script for behavioural risks</span></div>
           <div style="margin-top:0.5rem"><span class="pv-blue">library</span>(reproducr)</div>
-          <div style="margin-top:0.75rem"><span class="pv-blue">validate_env</span>(<span class="pv-teal">"production"</span>)</div>
-          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> R 4.3.2 — certified</div>
-          <div><span class="pv-green">✓</span> 23 packages — IQ passed</div>
-          <div><span class="pv-green">✓</span> OQ tests: 847/847 passed</div>
-          <div><span class="pv-green">✓</span> PQ workflow: complete</div>
-          <div style="margin-top:0.75rem"><span class="pv-label"># Generate validation report</span></div>
-          <div><span class="pv-blue">export_validation_report</span>()</div>
-          <div style="margin-top:0.5rem"><span class="pv-teal">→</span> validation_report_2026.pdf</div>
-          <div><span class="pv-teal">→</span> Audit trail: 1,247 entries</div>
-          <div><span class="pv-teal">→</span> SHA-256: a3f8c2d1...</div>
+          <div style="margin-top:0.75rem">report &lt;- <span class="pv-blue">audit_script</span>(<span class="pv-teal">"analysis.R"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-label">  Files scanned:   1</span></div>
+          <div><span class="pv-label">  Calls detected:  23</span></div>
+          <div style="margin-top:0.75rem">risks &lt;- <span class="pv-blue">risk_score</span>(report)</div>
+          <div style="margin-top:0.5rem"><span class="pv-label">  HIGH: 0  MEDIUM: 1  LOW: 2</span></div>
+          <div style="margin-top:0.75rem"><span class="pv-label"># Certify outputs and detect drift</span></div>
+          <div><span class="pv-blue">certify</span>(outputs=list(coefs=coef(model)), tag=<span class="pv-teal">"v1"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> certified 3 output(s) under tag 'v1'</div>
+          <div style="margin-top:0.75rem"><span class="pv-blue">check_drift</span>(outputs=list(coefs=coef(model)), against=<span class="pv-teal">"v1"</span>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> Verdict: ALL OUTPUTS MATCH</div>
         </div>
       </div>
     </div>
