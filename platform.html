@@ -287,7 +287,7 @@
         <div>
           <div class="pillar-num">02 — Reproduce</div>
           <h3 class="display display-sm" style="margin-bottom:1rem">Results that<br><em>don't drift.</em></h3>
-          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem">Consistent reproducibility across environments, teams, and time. Locked package versions, containerised execution, and continuous drift monitoring ensure your analysis at database lock matches your analysis at submission — to the decimal.</p>
+          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem">Consistent reproducibility across environments, teams, and time. Locked package versions, containerised execution, and continuous drift monitoring ensure your analysis at database lock is traceable and verifiable at submission.</p>
           <ul class="feat-list" style="font-size:0.9rem">
             <li>Environment snapshots and lockfiles at any analysis stage</li>
             <li>Continuous drift detection — alerts on any environmental change</li>
@@ -304,18 +304,23 @@
           </div>
         </div>
         <div class="pillar-visual">
-          <div><span class="pv-label"># Lock analysis environment</span></div>
-          <div style="margin-top:0.5rem"><span class="pv-blue">audit_script</span>(<span class="pv-teal">"primary_analysis.R"</span>)</div>
-          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> 18 functions certified</div>
-          <div><span class="pv-green">✓</span> Risk score: <span class="pv-teal">0.02</span> (low)</div>
-          <div><span class="pv-green">✓</span> 35 audit entries logged</div>
-          <div style="margin-top:0.75rem"><span class="pv-blue">lock_environment</span>(<span class="pv-teal">"DBL"</span>)</div>
-          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> Snapshot: env_2026-06-20</div>
-          <div><span class="pv-green">✓</span> 23 packages locked</div>
-          <div style="margin-top:0.75rem"><span class="pv-label"># Check for drift</span></div>
-          <div><span class="pv-blue">check_drift</span>()</div>
-          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> No drift detected</div>
-          <div><span class="pv-green">✓</span> Environment: stable</div>
+          <div><span class="pv-label"># Certify outputs at database lock</span></div>
+          <div style="margin-top:0.5rem"><span class="pv-blue">certify</span>(</div>
+          <div style="padding-left:1.25rem">outputs = list(</div>
+          <div style="padding-left:2.5rem">coefs     = coef(model),</div>
+          <div style="padding-left:2.5rem">r_squared = summary(model)$r.squared</div>
+          <div style="padding-left:1.25rem">),</div>
+          <div style="padding-left:1.25rem">tag    = <span class="pv-teal">"DBL"</span>,</div>
+          <div style="padding-left:1.25rem">script = <span class="pv-teal">"analysis.R"</span></div>
+          <div>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> certified 2 output(s) under tag 'DBL'</div>
+          <div style="margin-top:0.75rem"><span class="pv-label"># At submission — check for drift</span></div>
+          <div><span class="pv-blue">check_drift</span>(</div>
+          <div style="padding-left:1.25rem">outputs = list(coefs = coef(model), r_squared = summary(model)$r.squared),</div>
+          <div style="padding-left:1.25rem">against = <span class="pv-teal">"DBL"</span></div>
+          <div>)</div>
+          <div style="margin-top:0.5rem"><span class="pv-green">✓</span> Verdict: ALL OUTPUTS MATCH</div>
+          <div><span class="pv-green">✓</span> OK: 2  Drifted: 0</div>
         </div>
       </div>
     </div>
